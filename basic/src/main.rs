@@ -1,5 +1,8 @@
 
+use std::cmp::Ordering;
+
 mod functions;
+mod files;
 
 fn main() {
     let language: Vec<String> = std::env::args().skip(1).collect();
@@ -12,15 +15,15 @@ fn main() {
     functions::insert_ref(true);
 
     functions::execute_table();
-    reference_reference();
-    execute_factorial();
+    functions::reference_reference();
+    functions::execute_factorial();
 
     let x = 10;
-    g(&x);
+    functions::g(&x);
     println!("{}", x);
 
     let samples: [i32; 4] = [2, 4, 32, 0];
-    let smallest = smallest(&samples);
+    let smallest = functions::smallest(&samples);
     println!("{}", smallest);
 
     let mut v = Vec::new();
@@ -30,66 +33,56 @@ fn main() {
     v.push("hello".to_string());
     v.push("h".to_string());
 
-    let sa = StringTable { elements: v};
+    let sa =  functions::StringTable { elements: v};
 
-    let find = sa.find_by_prefix("hfjdksafljd").unwrap();
-}
-
-fn reference_reference() {
-    #[derive(Debug)]
-    struct Point {
-        x: i32,
-        y: i32
+    let find = sa.find_by_prefix("h");
+    match find {
+        Some(value) => println!("{}", value),
+        None => assert!(false),
     }
 
-    let point = Point { x: 1000, y: 200 };
-    let r: &Point = &point;
-    let rr: &&Point = &r;
-    let rrr: &&&Point = &rr;
+    println!("{}",{ 1 });
 
-    println!("point x:{}, y:{}", rrr.x, rrr.y);
-    assert!(rr.y == rrr.y);
-    assert!(r.x == rrr.x);
-    let x = 10;
-    let y = 10;
+    println!("{}",{ 1; 0 });
 
-    let rx = &x;
-    let rrx = &rx;
-}
-
-fn factorial(n: usize)  -> usize {
-    (1..n+1).fold(1, |a, b| a * b)
-}
-
-fn execute_factorial() {
-    let r = &factorial(6);
-
-    assert_eq!(r + &1009, 1729);
-}
-
-fn g<'a> (p: &'a i32) {
-    println!("{}",p );
-}
-
-fn smallest(v: &[i32]) -> &i32 {
-    let mut s = &v[0];
-    for r in &v[1..] {
-        if *r < *s { s = r ;}
+    let name;
+    if "h" == "h" {
+        name = "h"
+    } else {
+        name = "unknwon"
     }
-    s
-}
 
-struct StringTable {
-    elements: Vec<String>,
-}
+    println!("{}", name);
+    show_files();
 
-impl StringTable {
-    fn find_by_prefix(&self, prefix: &str) -> Option<&String> {
-        for i in 0 .. self.elements.len() {
-            if self.elements[i].starts_with(prefix) {
-                return Some(&self.elements[i]);
-            }
+    let filename = "rustv4.txt";
+
+    let mut file = match files::open::open_file(&filename) {
+        Some(file) => file,
+        None => match files::create::create_file(&filename) {
+            Ok(file) => files::open::open_file(&filename).unwrap(),
+            Err(why) => panic!("{}",why)
         }
-        None
+    };
+    files::read::read_file(&mut file);
+}
+
+fn show_files() {
+    let mut v = vec![];
+    v.push("hell");
+    v.push("dog");
+    v.push("cat");
+    v.push("dog");
+
+    fn cmp_name(a: &str, b: &str) -> Ordering {
+       a.cmp(&b) 
+    }
+
+    let order = cmp_name(&v[1], &v[3]);
+
+    match order {
+        Ordering::Less => println!("Less"),
+        Ordering::Equal => println!("Equal"),
+        Ordering::Greater => println!("Greater"),
     }
 }
