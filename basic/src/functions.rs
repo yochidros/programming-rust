@@ -85,7 +85,7 @@ pub fn print_args_type(args: &Vec<String>) {
 }
 
 pub fn owenership_value() {
-    let mut x = vec![10, 20, 30];
+    let x = vec![10, 20, 30];
 
     // x's item moved 'item'    
     // for item in x {
@@ -101,14 +101,15 @@ pub fn owenership_value() {
 
 pub fn reference_values() {
     let rs = Rc::new("shirataki".to_string());
-    let rt = rs.clone();
-    let mut ru = rs.clone();
+    let _rt = rs.clone();
+    let mut _ru = rs.clone();
 
-    ru = Rc::new("ninjin".to_string());
+    _ru = Rc::new("ninjin".to_string());
 
-    println!("{:?}, {:?}", rs, ru);
+    println!("{:?}, {:?}, {:?}", rs, _rt, _ru);
 }
 
+#[allow(unused_variables)]
 pub fn reference_reference() {
     #[derive(Debug)]
     struct Point {

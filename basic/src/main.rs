@@ -61,11 +61,18 @@ fn main() {
     let mut file = match files::open::open_file(&filename) {
         Some(file) => file,
         None => match files::create::create_file(&filename) {
-            Ok(file) => files::open::open_file(&filename).unwrap(),
+            Ok(_file) => files::open::open_file(&filename).unwrap(),
             Err(why) => panic!("{}",why)
         }
     };
+
     files::read::read_file(&mut file);
+
+    match files::delete::delete_file(&filename) {
+        Ok(msg) => println!("{}", msg),
+        Err(desc) => panic!("{}", desc),
+    }
+
     println!("{:?}", create_vec(3));
 
     let closure = |x: u64| -> bool {x % 2 == 0 };

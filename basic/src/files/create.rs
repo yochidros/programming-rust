@@ -4,7 +4,6 @@ use std::error::Error;
 
 pub fn create_file(filename: &str) -> Result<File, String> {
    let path = Path::new(filename);
-   let display = path.display();
 
    let result = match File::create(&path) {
        Ok(file) => {
