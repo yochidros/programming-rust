@@ -4,4 +4,4 @@ version = "0.1.0"
 authors = ["yochidros <mm9.movement.trb@gmail.com>"]
 
 [dependencies]
-fern_sim = { path = "../fern-sim" }
+fern-sim = { path = "../fern-sim" }

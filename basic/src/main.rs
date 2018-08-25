@@ -1,4 +1,7 @@
 
+extern crate fern_sim;
+
+use fern_sim::{ Fern, run_simulation};
 mod functions;
 mod files;
 
@@ -82,22 +85,4 @@ fn main() {
 
 fn create_vec(capcity: usize) -> Vec<i32> {
     return Vec::<i32>::with_capacity(capcity);
-}
-
-#[derive(Debug)]
-struct Fern {
-    size: f64,
-    growth_rate: f64,
-}
-
-impl Fern {
-    fn grow(&mut self) {
-        self.size *= 1.0 + self.growth_rate;
-    }
-}
-
-fn run_simulation(fern: &mut Fern, days: usize) {
-    for _ in 0 .. days {
-        fern.grow();
-    }
 }

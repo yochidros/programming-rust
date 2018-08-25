@@ -1,4 +1,11 @@
 [[package]]
 name = "basic"
 version = "0.1.0"
+dependencies = [
+ "fern-sim 0.1.0",
+]
+
+[[package]]
+name = "fern-sim"
+version = "0.1.0"
 
