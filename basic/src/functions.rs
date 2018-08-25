@@ -1,6 +1,7 @@
 
 use std::collections::HashMap;
 use std::rc::Rc;
+use std::cmp::Ordering;
 
 type Table = HashMap<String, Vec<String>>;
 
@@ -164,5 +165,25 @@ impl StringTable {
             }
         }
         None
+    }
+}
+
+pub fn show_files() {
+    let mut v = vec![];
+    v.push("hell");
+    v.push("dog");
+    v.push("cat");
+    v.push("dog");
+
+    fn cmp_name(a: &str, b: &str) -> Ordering {
+       a.cmp(&b) 
+    }
+
+    let order = cmp_name(&v[1], &v[3]);
+
+    match order {
+        Ordering::Less => println!("Less"),
+        Ordering::Equal => println!("Equal"),
+        Ordering::Greater => println!("Greater"),
     }
 }

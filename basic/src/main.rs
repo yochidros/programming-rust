@@ -1,6 +1,4 @@
 
-use std::cmp::Ordering;
-
 mod functions;
 mod files;
 
@@ -53,7 +51,7 @@ fn main() {
     }
 
     println!("{}", name);
-    show_files();
+    functions::show_files();
 
     let filename = "rustv4.txt";
 
@@ -65,24 +63,41 @@ fn main() {
         }
     };
     files::read::read_file(&mut file);
+    println!("{:?}", create_vec(3));
+
+    let closure = |x: u64| -> bool {x % 2 == 0 };
+    println!("{}", closure(2));
+
+    let mut fern = Fern {
+        size: 1.0,
+        growth_rate: 0.001,
+    };
+
+    println!("{}", fern.size);
+    run_simulation(&mut fern, 100);
+    println!("{}", fern.size)
+
 }
 
-fn show_files() {
-    let mut v = vec![];
-    v.push("hell");
-    v.push("dog");
-    v.push("cat");
-    v.push("dog");
 
-    fn cmp_name(a: &str, b: &str) -> Ordering {
-       a.cmp(&b) 
+fn create_vec(capcity: usize) -> Vec<i32> {
+    return Vec::<i32>::with_capacity(capcity);
+}
+
+#[derive(Debug)]
+struct Fern {
+    size: f64,
+    growth_rate: f64,
+}
+
+impl Fern {
+    fn grow(&mut self) {
+        self.size *= 1.0 + self.growth_rate;
     }
+}
 
-    let order = cmp_name(&v[1], &v[3]);
-
-    match order {
-        Ordering::Less => println!("Less"),
-        Ordering::Equal => println!("Equal"),
-        Ordering::Greater => println!("Greater"),
+fn run_simulation(fern: &mut Fern, days: usize) {
+    for _ in 0 .. days {
+        fern.grow();
     }
 }

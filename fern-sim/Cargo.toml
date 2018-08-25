@@ -1,7 +1,6 @@
 [package]
-name = "basic"
+name = "fern-sim"
 version = "0.1.0"
 authors = ["yochidros <mm9.movement.trb@gmail.com>"]
 
 [dependencies]
-fern_sim = { path = "../fern-sim" }
