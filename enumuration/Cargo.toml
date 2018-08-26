@@ -1,0 +1,9 @@
+[package]
+name = "enumuration"
+version = "0.1.0"
+authors = ["yochidros <mm9.movement.trb@gmail.com>"]
+
+[dependencies]
+enum_primitive = "0.1.1"
+rand = "0.5.5"
+num = "0.2.0"
