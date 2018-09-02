@@ -1,0 +1,9 @@
+[package]
+name = "serialize"
+version = "0.1.0"
+authors = ["yochidros <mm9.movement.trb@gmail.com>"]
+
+[dependencies]
+serde = "1.0.76"
+serde_derive = "1.0.76"
+serde_json = "1.0.26"
