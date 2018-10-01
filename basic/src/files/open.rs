@@ -1,6 +1,6 @@
+use std::error::Error;
 use std::fs::File;
 use std::path::Path;
-use std::error::Error;
 
 pub fn open_file(filename: &str) -> Option<File> {
     let path = Path::new(filename);
@@ -10,8 +10,7 @@ pub fn open_file(filename: &str) -> Option<File> {
         Err(why) => {
             println!("{}", why.description());
             Option::None
-        },
+        }
     };
     file
 }
-

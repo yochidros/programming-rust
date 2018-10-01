@@ -1,19 +1,19 @@
-pub mod open;
 pub mod create;
-pub mod read;
 pub mod delete;
+pub mod open;
+pub mod read;
 
 #[test]
 fn test_exist_file_open() {
     let filename = "text.txt";
     let file = open::open_file(&filename);
-    assert!(file.is_some()); 
+    assert!(file.is_some());
 }
 
 #[test]
 fn test_not_exist_file_open() {
     let filename = "not_text.txt";
-    let file = open::open_file(&filename); 
+    let file = open::open_file(&filename);
     assert!(file.is_none());
 }
 
@@ -23,14 +23,14 @@ fn test_create_file() {
     let file = create::create_file(&filename);
     assert!(file.is_ok());
     match delete::delete_file(&filename) {
-        Ok(msg) => { 
+        Ok(msg) => {
             println!("{}", msg);
             assert!(true)
-        },
+        }
         Err(error) => {
             println!("{}", error);
             assert!(false)
-        },
+        }
     }
 }
 

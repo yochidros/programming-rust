@@ -1,9 +1,9 @@
-
 extern crate fern_sim;
 
-use fern_sim::{ Fern, run_simulation};
-mod functions;
+use fern_sim::{run_simulation, Fern};
+
 mod files;
+mod functions;
 
 fn main() {
     let language: Vec<String> = std::env::args().skip(1).collect();
@@ -15,7 +15,6 @@ fn main() {
     functions::reference_values();
     functions::insert_ref(true);
 
-    functions::execute_table();
     functions::reference_reference();
     functions::execute_factorial();
 
@@ -34,7 +33,7 @@ fn main() {
     v.push("hello".to_string());
     v.push("h".to_string());
 
-    let sa =  functions::StringTable { elements: v};
+    let sa = functions::StringTable { elements: v };
 
     let find = sa.find_by_prefix("h");
     match find {
@@ -42,11 +41,17 @@ fn main() {
         None => assert!(false),
     }
 
-    println!("{}",{ 1 });
 
-    println!("{}",{ 1; 0 });
+    println!("{}", { 1 });
+
+    println!("{}", {
+        1;
+        0
+    });
+
 
     let name;
+
     if "h" == "h" {
         name = "h"
     } else {
@@ -62,8 +67,8 @@ fn main() {
         Some(file) => file,
         None => match files::create::create_file(&filename) {
             Ok(_file) => files::open::open_file(&filename).unwrap(),
-            Err(why) => panic!("{}",why)
-        }
+            Err(why) => panic!("{}", why),
+        },
     };
 
     files::read::read_file(&mut file);
@@ -75,7 +80,7 @@ fn main() {
 
     println!("{:?}", create_vec(3));
 
-    let closure = |x: u64| -> bool {x % 2 == 0 };
+    let closure = |x: u64| -> bool { x % 2 == 0 };
     println!("{}", closure(2));
 
     let mut fern = Fern {
@@ -86,9 +91,7 @@ fn main() {
     println!("{}", fern.size);
     run_simulation(&mut fern, 100);
     println!("{}", fern.size)
-
 }
-
 
 fn create_vec(capcity: usize) -> Vec<i32> {
     return Vec::<i32>::with_capacity(capcity);

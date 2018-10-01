@@ -1,6 +1,6 @@
+use std::error::Error;
 use std::fs::File;
 use std::io::Read;
-use std::error::Error;
 
 pub fn read_file(file: &mut File) {
     let mut s = String::new();

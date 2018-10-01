@@ -1,7 +1,7 @@
-use std::path::Path;
 use std::fs::remove_file;
+use std::path::Path;
 
-pub fn delete_file(filename: &str) -> Result<String,String> {
+pub fn delete_file(filename: &str) -> Result<String, String> {
     let path = Path::new(filename);
 
     let result = match remove_file(&path) {
